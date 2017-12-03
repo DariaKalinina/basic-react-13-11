@@ -1,16 +1,19 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
+import Accordion from './common/Accordion'
+import {connect} from 'react-redux'
+import {filtratedArticlesSelector} from '../selectors'
 
-export default class ArticleList extends Component {
-    state = {
-        openArticleId: null
-    }
-
+class ArticleList extends Accordion {
     render() {
-        const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
-            <Article article = {article}
-                     isOpen = {this.state.openArticleId === article.id}
-                     toggleOpen = {this.toggleOpenArticle}
+        console.log('---', 2)
+        const {articles} = this.props
+        if (!articles.length) return <h3>No Articles</h3>
+        const articleElements = articles.map((article) => <li key={article.id}>
+            <Article article={article}
+                     isOpen={article.id === this.state.openItemId}
+                     toggleOpen={this.toggleOpenItemMemoized(article.id)}
             />
         </li>)
         return (
@@ -19,12 +22,20 @@ export default class ArticleList extends Component {
             </ul>
         )
     }
-/*
-
-    toggleOpenArticleWitoutCurr(openArticleId) {
-        this.setState({ openArticleId })
-    }
-*/
-
-    toggleOpenArticle = openArticleId => this.setState({ openArticleId })
 }
+
+
+ArticleList.defaultProps = {
+    articles: []
+}
+
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired
+}
+
+export default connect(state => {
+    console.log('---', 0)
+    return {
+        articles: filtratedArticlesSelector(state)
+    }
+})(ArticleList)
