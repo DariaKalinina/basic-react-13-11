@@ -5,17 +5,22 @@ import CommentList from '../CommentList'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import './style.css'
-import {deleteArticle} from '../../AC'
+import {deleteArticle, loadArticleById} from '../../AC'
+import Loader from '../common/Loader'
+import {articleSelector} from '../../selectors'
+import LocalizedText from '../common/LocalizedText'
 
-class Article extends PureComponent {
+class Article extends Component {
     static propTypes = {
+        id: PropTypes.string.isRequired,
+        isOpen: PropTypes.bool,
+        toggleOpen: PropTypes.func,
+        //from connect
         article: PropTypes.shape({
-            title: PropTypes.string.isRequired,
+            title: PropTypes.string,
             text: PropTypes.string,
             comments: PropTypes.array
-        }).isRequired,
-        isOpen: PropTypes.bool,
-        toggleOpen: PropTypes.func
+        })
     }
 
     constructor(props) {
@@ -26,10 +31,9 @@ class Article extends PureComponent {
             counter: 0
         }
     }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
-            isOpen: nextProps.defaultOpen
-        })
+    componentDidMount() {
+        const {id, article, loadArticleById} = this.props
+        if (!article || (!article.loading && !article.text)) loadArticleById(id)
     }
 
     componentDidCatch(err) {
@@ -51,18 +55,12 @@ class Article extends PureComponent {
 */
 
     render() {
-        console.log('---', 'rendering article')
+        console.log('---', 4)
         if (this.state.error) return <h1>{this.state.error}</h1>
 
         const {article, isOpen, toggleOpen} = this.props
-        const body = isOpen && (
-            <div>
-                <button onClick = {this.increment}>increment</button>
-                <section>{article.text}</section>
-                <CommentList comments = {article.comments}
-                             key = {this.state.counter}/>
-            </div>
-        )
+        if (!article) return null
+
         return (
             <div>
                 <h2>
@@ -70,7 +68,9 @@ class Article extends PureComponent {
                     <button onClick={toggleOpen}>
                         {isOpen ? 'close' : 'open'}
                     </button>
-                    <button onClick = {this.handleDelete}>delete me</button>
+                    <button onClick = {this.handleDelete}>
+                        <LocalizedText>delete me</LocalizedText>
+                    </button>
                 </h2>
                 <CSSTransition
                     transitionName = 'article'
@@ -80,9 +80,23 @@ class Article extends PureComponent {
                     transitionAppear
                     component = 'div'
                 >
-                    {body}
+                    {this.getBody()}
                 </CSSTransition>
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+            </div>
+        )
+    }
+
+    getBody() {
+        const {article, isOpen} = this.props
+        if (!isOpen) return null
+        if (article.loading) return <Loader />
+        return (
+            <div>
+                <button onClick = {this.increment}>increment</button>
+                <section>{article.text}</section>
+                <CommentList article = {article}
+                             key = {this.state.counter}/>
             </div>
         )
     }
@@ -94,4 +108,6 @@ class Article extends PureComponent {
 }
 
 
-export default connect(null, { deleteArticle })(Article)
+export default connect((state, props) => ({
+    article: articleSelector(state, props)
+}), { deleteArticle, loadArticleById }, null, { pure: false })(Article)
