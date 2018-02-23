@@ -43,6 +43,7 @@ class Article extends PureComponent {
         if (this.state.error) return <h1>{this.state.error}</h1>
 
         const {article, isOpen, toggleOpen} = this.props
+        console.log('---', toggleOpen)
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
