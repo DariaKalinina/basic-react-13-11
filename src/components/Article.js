@@ -1,6 +1,7 @@
 import React, {Component, PureComponent} from 'react'
 import CommentList from './CommentList'
 import PropTypes from 'prop-types'
+import toggleOpen from "../decorators/toggleOpen";
 
 class Article extends PureComponent {
     static propTypes = {
@@ -42,8 +43,7 @@ class Article extends PureComponent {
         console.log('---', 'rendering article')
         if (this.state.error) return <h1>{this.state.error}</h1>
 
-        const {article, isOpen, toggleOpen} = this.props
-        console.log('---', toggleOpen)
+        const {article, isOpen, toggleOpenArticle} = this.props
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
@@ -54,7 +54,7 @@ class Article extends PureComponent {
             <div>
                 <h2>
                     {article.title}
-                    <button onClick={() => toggleOpen(article.id)}>
+                    <button onClick={() => toggleOpenArticle(article.id)}>
                         {isOpen ? 'close' : 'open'}
                     </button>
                 </h2>

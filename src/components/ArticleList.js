@@ -14,6 +14,12 @@ export class ArticleList extends Component {
     //     openArticleId: null
     // }
 
+    // componentWillReceiveProps(nextProps) {
+    //     if (nextProps.openArticleId === this.props.openArticleId) {
+    //         nextProps.article.id = null
+    //     }
+    // }
+
 
     render() {
         const { toggleOpenArticle, openArticleId } = this.props
@@ -21,7 +27,7 @@ export class ArticleList extends Component {
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                      isOpen = {openArticleId === article.id}
-                     toggleOpen = {toggleOpenArticle}
+                     toggleOpenArticle = {toggleOpenArticle}
             />
         </li>)
         return (
