@@ -1,4 +1,4 @@
-import {INCREMENT, DELETE_ARTICLE, SELECT_ARTICLE} from '../constants'
+import {INCREMENT, DELETE_ARTICLE, SELECT_ARTICLE, CHOOSE_DATES} from '../constants'
 
 export function increment() {
     const action = { type: INCREMENT }
@@ -16,5 +16,15 @@ export function selectArticle(id) {
     return {
         type: SELECT_ARTICLE,
         payload: { id }
+    }
+}
+
+export function chooseDates(from, to) {
+    return {
+        type: CHOOSE_DATES,
+        payload: {
+            from,
+            to
+        }
     }
 }
