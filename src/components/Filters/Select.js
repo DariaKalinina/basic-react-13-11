@@ -14,7 +14,7 @@ class SelectFilter extends Component {
     handleChange = (e) => {
         const { selectArticle } = this.props;
         let articleId = e[0];
-        console.log('---- ', articleId)
+        console.log('---- ', articleId, e.target.value);    // e.target.value returns undefined!
         selectArticle(articleId)
     }
 
