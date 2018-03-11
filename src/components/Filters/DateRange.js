@@ -10,6 +10,7 @@ class DateRange extends Component {
     handleDayClick = (day) => {
         const { chooseDates } = this.props;
         const dates = DateUtils.addDayToRange(day, this.props);
+        // console.log(dates.from, dates.to);
         chooseDates(dates.from, dates.to);
     };
 

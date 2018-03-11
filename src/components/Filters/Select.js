@@ -11,10 +11,10 @@ class SelectFilter extends Component {
         articles: PropTypes.array.isRequired
     };
 
-    handleChange = (e) => {
+    handleChange = (item) => {
         const { selectArticle } = this.props;
-        let articleId = e[0];
-        console.log('---- ', articleId);    // e.target.value returns undefined!
+        let [ articleId ] = item;
+        console.log('---- ', articleId.value);    // e.target.value returns undefined!
         selectArticle(articleId.value)
     }
 
