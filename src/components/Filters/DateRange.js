@@ -6,17 +6,11 @@ import {connect} from "react-redux";
 import {chooseDates} from "../../AC";
 
 class DateRange extends Component {
-    // state = {
-    //     from: null,
-    //     to: null
-    // };
 
     handleDayClick = (day) => {
         const { chooseDates } = this.props;
-        console.log(DateUtils.addDayToRange(day));
-        const dates = DateUtils.addDayToRange(day);
-        console.log(dates.from);
-        chooseDates(dates.from, dates.to)
+        const dates = DateUtils.addDayToRange(day, this.props);
+        chooseDates(dates.from, dates.to);
     };
 
     render() {
