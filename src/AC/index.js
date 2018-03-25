@@ -12,19 +12,16 @@ export function deleteArticle(id) {
     }
 }
 
-export function selectArticle(id) {
+export function selectArticle(selected) {
     return {
         type: SELECT_ARTICLE,
-        payload: { id }
+        payload: { selected }
     }
 }
 
-export function chooseDates(from, to) {
+export function chooseDates(dateRange) {
     return {
         type: CHOOSE_DATES,
-        payload: {
-            from,
-            to
-        }
+        payload: { dateRange }
     }
 }

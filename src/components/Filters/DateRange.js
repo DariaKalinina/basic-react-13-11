@@ -8,14 +8,12 @@ import {chooseDates} from "../../AC";
 class DateRange extends Component {
 
     handleDayClick = (day) => {
-        const { chooseDates } = this.props;
-        const dates = DateUtils.addDayToRange(day, this.props);
-        // console.log(dates.from, dates.to);
-        chooseDates(dates.from, dates.to);
+        const { chooseDates, range } = this.props;
+        chooseDates(DateUtils.addDayToRange(day, range));
     };
 
     render() {
-        const { from, to } = this.props;
+        const { from, to } = this.props.range;
         const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`;
         return (
             <div className="date-range">
@@ -31,8 +29,7 @@ class DateRange extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    from: state.dateRange.from,
-    to: state.dateRange.to
+    range: state.filters.dateRange
 });
 
 export default connect(

@@ -13,9 +13,11 @@ class SelectFilter extends Component {
 
     handleChange = (item) => {
         const { selectArticle } = this.props;
-        let [ articleId ] = item;
-        console.log('---- ', articleId.value);    // e.target.value returns undefined!
-        selectArticle(articleId.value)
+        // let [ articleId ] = item;
+        // console.log('---- ', articleId.value);    // e.target.value returns undefined!
+        // selectArticle(articleId.value)
+
+        selectArticle(item.map(option => option.value))
     }
 
     render() {
@@ -36,7 +38,7 @@ class SelectFilter extends Component {
 
 const mapStateToProps = (state) => ({
     articles: state.articles,
-    selected: state.select
+    selected: state.filters.selected
 })
 
 export default connect(mapStateToProps, {
