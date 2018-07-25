@@ -1,12 +1,12 @@
-import React from 'react'
-import Article from './Article'
-import articles from '../fixtures'
+import React from 'react';
+import ArticleList from './ArticleList';
 
-function App() {
+
+function App( {articles} ) {
     return (
         <div>
             <h1>App name!</h1>
-            <Article article={articles[0]} foo="bar" flag />
+            <ArticleList articles = {articles}/>
         </div>
     )
 }
