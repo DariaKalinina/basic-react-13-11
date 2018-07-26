@@ -4,7 +4,7 @@ import toggleOpen from '../decorators/toggleOpen'
 
 class CommentList extends Component {
     render() {
-        const {isOpen, toggleOpen} = this.props
+		const {isOpen, toggleOpen} = this.props
         const text = isOpen ? 'hide comments' : 'show comments'
         return (
             <div>
