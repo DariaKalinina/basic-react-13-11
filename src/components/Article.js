@@ -9,7 +9,7 @@ export default class Article extends Component {
     render() {
         const {article} = this.props;
 				const body = this.state.isOpen && <section>{article.text}</section>;
-				const comment = article.comments && <div><CommentList comments = {article.comments}/></div>;
+				const comment = article.comments && <CommentList comments = {article.comments}/>;
         return (
             <div>
                 <h2>
