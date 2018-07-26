@@ -1,7 +1,14 @@
 import React, {Component} from 'react'
 import Article from './Article'
+import PropTypes from 'prop-types'
 
 export default class ArticleList extends Component {
+	static propTypes = {
+		articles: PropTypes.array.isRequired,
+		isOpen: PropTypes.bool,
+		toggleOpen: PropTypes.func
+}
+
     state = {
         openArticleId: null
     }
