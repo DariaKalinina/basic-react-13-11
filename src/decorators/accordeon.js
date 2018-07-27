@@ -1,5 +1,5 @@
 //HOC === Higher Order Component === decorator
-import React from 'react'
+import React, {Component} from 'react'
 
 export default (OriginalComponent) => class DecoratedComponent extends React.Component {
 	state = {
@@ -13,3 +13,16 @@ export default (OriginalComponent) => class DecoratedComponent extends React.Com
 		 							toggleOpen = {this.toggleOpenArticle}/>
     }
 }
+
+// export default class Accordeon extends React.Component {
+// 	constructor() {
+// 		super()
+// 		this.state = {
+// 			openArticleId: null
+// 		}
+// 		this.toggleOpen = this.toggleOpenArticle.bind(this)
+// 	}
+	
+// 	toggleOpenArticle = openArticleId => this.setState({ openArticleId })
+	
+// }
