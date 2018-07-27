@@ -1,17 +1,21 @@
 import React, {Component} from 'react'
 import Article from './Article'
+import PropTypes from 'prop-types'
+import accordeon from '../decorators/accordeon'
+//import Accordeon from '../decorators/accordeon'
 
-export default class ArticleList extends Component {
-    state = {
-        openArticleId: null
-    }
+class ArticleList extends Component {
+	static propTypes = {
+		articles: PropTypes.array.isRequired,
+		isOpen: PropTypes.bool,
+		toggleOpen: PropTypes.func
+}
 
     render() {
-        const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
-            <Article article = {article}
-                     isOpen = {this.state.openArticleId === article.id}
-                     toggleOpen = {this.toggleOpenArticle}
-            />
+		
+		const {openArticleId, toggleOpen} = this.props
+        const articleElements = this.props.articles.map((article) => <li key = {article.id}>
+			<Article article = {article} isOpen = {openArticleId === article.id} toggleOpen = {toggleOpen}/>
         </li>)
         return (
             <ul>
@@ -19,12 +23,36 @@ export default class ArticleList extends Component {
             </ul>
         )
     }
-/*
 
-    toggleOpenArticleWitoutCurr(openArticleId) {
-        this.setState({ openArticleId })
-    }
-*/
-
-    toggleOpenArticle = openArticleId => this.setState({ openArticleId })
 }
+
+export default accordeon(ArticleList)
+
+// class ArticleList extends Accordeon {
+// 	static propTypes = {
+// 		articles: PropTypes.array.isRequired,
+// 		isOpen: PropTypes.bool,
+// 		toggleOpen: PropTypes.func
+// 	}
+
+// 	constructor() {
+// 		super()
+// 	}
+
+//     render() {
+		
+// 		const openArticleId = this.state.openArticleId
+// 		const toggleOpen = this.toggleOpenArticle
+//         const articleElements = this.props.articles.map((article) => <li key = {article.id}>
+// 			<Article article = {article} isOpen = {openArticleId === article.id} toggleOpen = {toggleOpen}/>
+//         </li>)
+//         return (
+//             <ul>
+//                 {articleElements}
+//             </ul>
+//         )
+//     }
+
+// }
+
+// export default ArticleList
