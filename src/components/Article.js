@@ -18,12 +18,12 @@ class Article extends PureComponent {
 
         this.state = {
             error: null
-        }
+        	}
 		}
 		
 		//?? зачем это тут?
     // componentWillReceiveProps(nextProps) {
-		// 	console.log('componentWillReceiveProps', nextProps);
+	// 		console.log('componentWillReceiveProps', nextProps);
     //     if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
     //         isOpen: nextProps.defaultOpen
     //     })

@@ -10,6 +10,6 @@ export default (OriginalComponent) => class DecoratedComponent extends React.Com
     render() {
 		return <OriginalComponent {...this.props}
 									{...this.state}
-		 							toggleOpen = {this.toggleOpenArticle.bind(this)}/>
+		 							toggleOpen = {this.toggleOpenArticle}/>
     }
 }
