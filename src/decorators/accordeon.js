@@ -3,9 +3,11 @@ import React, {Component} from 'react'
 
 export default (OriginalComponent) => class DecoratedComponent extends React.Component {
 	state = {
-        openArticleId: null
+		openArticleId: null
 	}
-	toggleOpenArticle = openArticleId => this.setState({ openArticleId })
+	toggleOpenArticle = (openArticleId, isClose) => this.setState({ 
+		openArticleId
+	})
 	
     render() {
 		return <OriginalComponent {...this.props}
