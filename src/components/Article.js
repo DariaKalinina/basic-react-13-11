@@ -18,24 +18,14 @@ class Article extends PureComponent {
 
         this.state = {
 			error: null,
-			isClose: null
+			isOpenFlag: null
         }
 	}
 		
     componentWillReceiveProps(nextProps) {
-		if(nextProps.isOpen ) {
-			if(!this.state.isClose) {
-				this.setState({
-					isClose: nextProps.isOpen
-				})
-				
-			} else if(this.state.isClose) {
-				this.setState({
-					isClose: !nextProps.isOpen
-				})
-			}	
-		}
-			
+		this.setState({
+			isOpenFlag: nextProps.isOpenFlag
+		})	
 	}
 
 	//не используется в PureComponent
@@ -57,11 +47,11 @@ class Article extends PureComponent {
 		
 		const button = (
 			<button onClick={() => {toggleOpen(article.id)}}>
-				{(isOpen && this.state.isClose) ? 'close' : 'open'}
+				{(isOpen && this.state.isOpenFlag) ? 'close' : 'open'}
 			</button>
 		)
 
-        const body = (isOpen && this.state.isClose) && (
+        const body = (isOpen && this.state.isOpenFlag) && (
             <div>
                 <section>{article.text}</section>
                 <CommentList comments = {article.comments}/>
