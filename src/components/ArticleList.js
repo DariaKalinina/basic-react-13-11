@@ -1,19 +1,22 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Article from './Article';
 
 
-export default class ArticleList extends Component {
+export default class ArticleList extends React.Component {
     render() {
-			let articleItem = this.props.articles.map( (article) => {
-				 return (<li key = {article.id}><Article article = {article}/></li>);
-				}
-			);
-
-			
+		let articleItem = this.props.articles.map( (article) => {
 			return (
-				<ul>
-					{articleItem}
-				</ul>
+				<li key = {article.id}>
+					<Article article = {article}/>
+				</li>
 			)
-		}
+		})
+
+		
+		return (
+			<ul>
+				{articleItem}
+			</ul>
+		)
+	}
 }

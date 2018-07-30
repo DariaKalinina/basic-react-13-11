@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import Comment from './Comment';
 
-export default class CommentList extends Component {
+export default class CommentList extends React.Component {
 	state = {
 		isOpen: true
 	}
@@ -10,30 +10,34 @@ export default class CommentList extends Component {
 		console.log('commentList', this.props.comments.length);
 
 		let commentItem = this.props.comments.map( (comment) => {
-			return (<li key = {comment.id}><Comment comment = {comment}/></li>);
-			}
+			return (
+				<li key = {comment.id}>
+					<Comment comment = {comment}/>
+				</li>
+			)}
 		);	
 
 		const body = this.state.isOpen && (
 			<section>
 				{commentItem}
-			</section>);
+			</section>
+		);
 
 		return (
-				<div>
-					<button onClick={this.handleClick}>
-						{this.state.isOpen ? 'close comment' : 'open comment'}
-					</button>
-					{body}
-				</div>
+			<div>
+				<button onClick={this.handleClick}>
+					{this.state.isOpen ? 'close comment' : 'open comment'}
+				</button>
+				{body}
+			</div>
 		)
 	}
 
 	handleClick = () => {
-			console.log('---', 'clickedFromComment');
-			this.setState({
-					isOpen: !this.state.isOpen
-			})
-		}
+		console.log('---', 'clickedFromComment');
+		this.setState({
+				isOpen: !this.state.isOpen
+		})
+	}
 	
 }

@@ -1,15 +1,16 @@
-import React, {Component} from 'react';
+import React from 'react';
 import CommentList from './CommentList';
 
-export default class Article extends Component {
+export default class Article extends React.Component {
     state = {
         isOpen: true
     }
 
     render() {
         const {article} = this.props;
-				const body = this.state.isOpen && <section>{article.text}</section>;
-				const comment = article.comments && <CommentList comments = {article.comments}/>;
+		const body = this.state.isOpen && <section>{article.text}</section>;
+		const comment = article.comments && <CommentList comments = {article.comments}/>;
+
         return (
             <div>
                 <h2>
@@ -20,7 +21,7 @@ export default class Article extends Component {
                 </h2>
                 {body}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
-								{comment}
+				{comment}
             </div>
         )
     }
