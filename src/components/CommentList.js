@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 import PropTypes from 'prop-types'
 
-class CommentList extends Component {
+class CommentList extends React.Component {
 	static propTypes = {
 		comments: PropTypes.array
 	}

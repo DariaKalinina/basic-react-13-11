@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from 'react'
+import React, {PureComponent} from 'react'
 import CommentList from './CommentList'
 import PropTypes from 'prop-types'
 
@@ -19,8 +19,8 @@ class Article extends PureComponent {
         this.state = {
 			error: null,
 			isClose: null
-        	}
-		}
+        }
+	}
 		
     componentWillReceiveProps(nextProps) {
 		if(nextProps.isOpen ) {
@@ -57,9 +57,7 @@ class Article extends PureComponent {
 		
 
 		const button = (
-			<button onClick={() => {
-				toggleOpen(article.id)}
-				}>
+			<button onClick={() => {toggleOpen(article.id)}}>
 				{(isOpen && this.state.isClose) ? 'close' : 'open'}
 			</button>
 		)
