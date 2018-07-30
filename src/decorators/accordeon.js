@@ -5,7 +5,8 @@ export default (OriginalComponent) => class DecoratedComponent extends React.Com
 	state = {
 		openArticleId: null
 	}
-	toggleOpenArticle = (openArticleId, isClose) => this.setState({ 
+
+	toggleOpenArticle = (openArticleId) => this.setState({ 
 		openArticleId
 	})
 	
