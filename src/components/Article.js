@@ -27,12 +27,12 @@ class Article extends PureComponent {
 			if(!this.state.isClose) {
 				this.setState({
 					isClose: nextProps.isOpen
-					})
+				})
 				
 			} else if(this.state.isClose) {
 				this.setState({
 					isClose: !nextProps.isOpen
-					})
+				})
 			}	
 		}
 			
@@ -55,7 +55,6 @@ class Article extends PureComponent {
 
 		const {article, isOpen, toggleOpen} = this.props
 		
-
 		const button = (
 			<button onClick={() => {toggleOpen(article.id)}}>
 				{(isOpen && this.state.isClose) ? 'close' : 'open'}
@@ -81,6 +80,5 @@ class Article extends PureComponent {
         )
     }
 }
-
 
 export default Article
