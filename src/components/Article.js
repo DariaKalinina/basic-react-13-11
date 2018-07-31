@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from 'react'
+import React, {PureComponent} from 'react'
 import CommentList from './CommentList'
 import PropTypes from 'prop-types'
 
@@ -18,16 +18,20 @@ class Article extends PureComponent {
 
         this.state = {
 			error: null,
-			close: false
-        	}
-		}
+			isOpenFlag: null
+        }
+	}
 		
-	//?? зачем это тут?
-    //componentWillReceiveProps(nextProps) {
-			// this.setState({
-			// 	close: !this.state.close
-			// })
-    //}
+    componentWillReceiveProps(nextProps) {
+		this.setState({
+			isOpenFlag: nextProps.isOpenFlag
+		})	
+	}
+
+	//не используется в PureComponent
+	// shouldComponentUpdate(nextProps, nextState) {
+	// 	console.log('nextProps, nextProps', nextProps, nextState);
+	// }
 
     componentDidCatch(err) {
         this.setState({
@@ -40,20 +44,14 @@ class Article extends PureComponent {
         if (this.state.error) return <h1>{this.state.error}</h1>
 
 		const {article, isOpen, toggleOpen} = this.props
-
+		
 		const button = (
-			<button onClick={() => {
-
-				this.setState({
-					close: !this.state.close
-				})
-				toggleOpen(article.id)}
-				}>
-				{(isOpen && this.state.close) ? 'close' : 'open'}
+			<button onClick={() => {toggleOpen(article.id)}}>
+				{(isOpen && this.state.isOpenFlag) ? 'close' : 'open'}
 			</button>
 		)
 
-        const body = (isOpen && this.state.close) &&(
+        const body = (isOpen && this.state.isOpenFlag) && (
             <div>
                 <section>{article.text}</section>
                 <CommentList comments = {article.comments}/>
@@ -72,6 +70,5 @@ class Article extends PureComponent {
         )
     }
 }
-
 
 export default Article

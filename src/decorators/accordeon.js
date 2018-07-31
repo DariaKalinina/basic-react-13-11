@@ -1,18 +1,36 @@
 //HOC === Higher Order Component === decorator
-import React, {Component} from 'react'
+import React from 'react'
 
 export default (OriginalComponent) => class DecoratedComponent extends React.Component {
 	state = {
-		openArticleId: null
+		openArticleId: null,
+		isOpenFlag: null
 	}
-	toggleOpenArticle = (openArticleId, isClose) => this.setState({ 
-		openArticleId
-	})
-	
+
+	toggleOpenArticle = (openArticleId) => {
+		console.log('openArticleId, this.state.isOpenFlag', openArticleId, this.state.isOpenFlag)
+		if (this.state.isOpenFlag === null) {
+			this.state.isOpenFlag = openArticleId	
+		} else {
+			this.state.isOpenFlag = ((this.state.isOpenFlag == this.state.openArticleId) 
+			? false : this.state.openArticleId)
+		}
+		
+		console.log('this.state.isOpenFlag', this.state.isOpenFlag)
+		this.setState({ 
+			openArticleId,
+			isOpenFlag: this.state.isOpenFlag
+		})
+	}	
+	S
     render() {
-		return <OriginalComponent {...this.props}
-									{...this.state}
-		 							toggleOpen = {this.toggleOpenArticle}/>
+		return (
+			<OriginalComponent 
+				{...this.props}
+				{...this.state}
+		 		toggleOpen = {this.toggleOpenArticle}
+			 />
+		)	 
     }
 }
 

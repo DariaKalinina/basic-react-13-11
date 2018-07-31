@@ -9,14 +9,22 @@ class ArticleList extends Component {
 		articles: PropTypes.array.isRequired,
 		isOpen: PropTypes.bool,
 		toggleOpen: PropTypes.func
-}
+	}
 
     render() {
 		
-		const {openArticleId, toggleOpen} = this.props
-        const articleElements = this.props.articles.map((article) => <li key = {article.id}>
-			<Article article = {article} isOpen = {openArticleId === article.id} toggleOpen = {toggleOpen}/>
-        </li>)
+		const {openArticleId, isOpenFlag, toggleOpen} = this.props
+        const articleElements = this.props.articles.map( (article) => 
+			<li key = {article.id}>
+				<Article 
+					article = {article} 
+					isOpen = {openArticleId === article.id} 
+					isOpenFlag = {isOpenFlag}
+					toggleOpen = {toggleOpen}
+					/>
+			</li>
+		)
+
         return (
             <ul>
                 {articleElements}
