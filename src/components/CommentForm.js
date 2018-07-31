@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class CommentForm extends React.Component {
-	
 	state = {
 		name: '',
 		comment: ''	
@@ -33,9 +32,5 @@ class CommentForm extends React.Component {
 	}
    
 }
-
-// CommentForm.propTypes = {
-//     handleChange: PropTypes.func.isRequired
-// }
 
 export default CommentForm
