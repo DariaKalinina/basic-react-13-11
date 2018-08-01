@@ -4,6 +4,10 @@ import Article from './Article'
 import Accordion from './common/Accordion'
 
 class ArticleList extends Accordion {
+	static propTypes = {
+        articles: PropTypes.array.isRequired,
+	}  
+
     render() {
         const {articles} = this.props
         if (!articles.length) return <h3>No Articles</h3>
@@ -26,8 +30,5 @@ ArticleList.defaultProps = {
     articles: []
 }
 
-ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
-}
 
 export default ArticleList

@@ -2,6 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class CommentForm extends React.Component {
+	static propTypes = {
+        handleFocus: PropTypes.func.isRequired,
+		handleBlur: PropTypes.func.isRequired,
+		handleChange: PropTypes.func.isRequired
+	}
+
 	render() {
 		const {name, comment, nameColor, commentColor, handleFocus, handleBlur, handleChange} = this.props
 		return (
@@ -10,7 +16,8 @@ class CommentForm extends React.Component {
 					Name: 
 					<input 
 						type="text" 
-						id="name" value={name} 
+						id="name" 
+						value={name} 
 						style={nameColor} 
 						onFocus={handleFocus} 
 						onBlur={handleBlur}  

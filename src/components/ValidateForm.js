@@ -1,7 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import CommentForm from './CommentForm'
 
 class ValidateForm extends React.Component {
+	static propTypes = {
+        name: PropTypes.object.isRequired,
+        comment: PropTypes.object.isRequired
+	}
+	
 	state = {
 		name: '',
 		nameColor: {},
