@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import ArticleList from './ArticleList'
 import ArticlesChart from './ArticlesChart'
 import UserForm from './UserForm'
+import DayPickerForm from './DayPickerForm'
 import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
@@ -22,6 +23,9 @@ class App extends Component {
             <div>
                 <h1>App name</h1>
                 <UserForm />
+				<br/>
+				<DayPickerForm /> 
+				<br/>
                 <Select options = {options} value = {this.state.selected} onChange = {this.handleSelect} multi />
                 <ArticleList articles = {articles} defaultOpenId = {articles[0].id}/>
                 <ArticlesChart articles = {articles} />
