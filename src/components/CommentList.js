@@ -28,10 +28,6 @@ class CommentList extends Component {
         const {comments, isOpen} = this.props
 		if (!isOpen) return null
 		
-		// const handleChange = (e) => {
-		// 	console.log(e)
-		// }
-
         const body = comments.length ? (
             <ul>
                 {comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)}
@@ -41,7 +37,7 @@ class CommentList extends Component {
         return (
             <div>
 				{body}
-				<ValidateForm />
+				<ValidateForm name={{min: 10, max: 100}} comment={{min: 20, max: 100}}/>
             </div>
         )
 	}
