@@ -17,9 +17,16 @@ class SelectFilter extends Component {
 
     handleChange = selected => {
 		const {selectArticles} = this.props
+		let idArr = []
+
 		this.setState({ selected })
-		// костыль обыкновенный: не могу придумать, как отдавать id последней выбранной статьи
-		selectArticles(selected[selected.length-1].value)
+
+		selected.forEach(article => {
+			const {value: id} = article
+			idArr.push(id)
+		})
+
+		selectArticles(idArr)
 	}
 
     render() {
@@ -27,8 +34,8 @@ class SelectFilter extends Component {
         const options = articles.map(article => ({
             label: article.title,
             value: article.id
-        }))
-
+		}))
+		
         return <Select
             options={options}
             value={this.state.selected}

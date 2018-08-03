@@ -12,9 +12,9 @@ export function deleteArticle(id) {
     }
 }
 
-export function selectArticles(id) {
+export function selectArticles(idArr) {
     return {
         type: SELECT_ARTICLE,
-        payload: { id }
+        payload: [ idArr ]
     }
 }
