@@ -5,9 +5,10 @@ export default (selectList = [], action) => {
 
     switch (type) {
 		case SELECT_ARTICLE:
-			selectList = [].concat(payload)
+			selectList = [].concat(...payload)
 			return selectList
     }
 	
     return selectList
 }
+
