@@ -11,7 +11,6 @@ class Filters extends Component {
 	
 	handleClick = () => {
 		const {filterArticle} = this.props
-		console.log('------ click из Filter ', this.props)
         filterArticle()
     }
 
@@ -26,9 +25,5 @@ class Filters extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-	articles: state.articles
-})
-
-export default connect(mapStateToProps, { filterArticle })(Filters)
+export default connect(null, { filterArticle })(Filters)
 

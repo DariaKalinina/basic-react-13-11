@@ -1,17 +1,16 @@
 import { SELECT_ARTICLE } from '../constants'
-import defaultArticles from '../fixtures'
 
-export default (articlesState = defaultArticles, action) => { 
+export default (selectList = [], action) => { 
 const { type, payload } = action
     switch (type) {
 		case SELECT_ARTICLE:
+			console.log('======= SELECT_ARTICLE')
 			let selectList = [].concat(...payload)
 			
-			console.log('======= articlesState', articlesState)
-			return articlesState.filter(article => article.id != selectList[selectList.length-1])
+			return selectList
 			
-    }
-	
-    return articlesState
+	}
+	console.log('======= selectList из SELECT_ARTICLE', selectList)
+    return selectList
 }
 

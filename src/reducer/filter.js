@@ -1,14 +1,15 @@
 import { FILTER_ARTICLE } from '../constants'
-import defaultArticles from '../fixtures'
 
-export default (filtredArticle = defaultArticles, action) => {
+export default (filtredArticle = [], action) => {
     const { type } = action
 
     switch (type) {
 		case FILTER_ARTICLE:
-			console.log('я тебя отфильтрую!!!')
+			console.log('======= FILTER_ARTICLE')
+			filtredArticle.push('1')
+
 			return filtredArticle
     }
-	
+	console.log('======= filtredArticle из FILTER_ARTICLE', filtredArticle)
     return filtredArticle
 }
