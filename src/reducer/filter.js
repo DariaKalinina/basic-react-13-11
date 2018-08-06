@@ -1,15 +1,24 @@
-import { FILTER_ARTICLE } from '../constants'
+import { SELECT_ARTICLE } from '../constants'
+import { DATE_RANGE } from '../constants'
 
-export default (filtredArticle = [], action) => {
-    const { type } = action
-
-    switch (type) {
-		case FILTER_ARTICLE:
-			console.log('======= FILTER_ARTICLE')
-			filtredArticle.push('1')
-
-			return filtredArticle
-    }
-	console.log('======= filtredArticle из FILTER_ARTICLE', filtredArticle)
-    return filtredArticle
+const defaultFilters = {
+	selected: [],
+	dateRange: {
+		from: null,
+		to: null
+	}
 }
+
+
+export default (filters = defaultFilters, action) => { 
+const { type, payload } = action
+    switch (type) {
+		case SELECT_ARTICLE:
+			return {...filters, selected: payload.idArr}
+
+		case DATE_RANGE:
+			return {...filters, dateRange: payload.range}	
+	}
+    return filters
+}
+

@@ -1,4 +1,4 @@
-import {INCREMENT, DELETE_ARTICLE, SELECT_ARTICLE, FILTER_ARTICLE} from '../constants'
+import {INCREMENT, DELETE_ARTICLE, SELECT_ARTICLE, DATE_RANGE} from '../constants'
 
 export function increment() {
     const action = { type: INCREMENT }
@@ -15,12 +15,13 @@ export function deleteArticle(id) {
 export function selectArticles(idArr) {
     return {
         type: SELECT_ARTICLE,
-        payload: [ idArr ]
+        payload: { idArr }
     }
 }
 
-export function filterArticle() {
+export function changeDataRange(range) {
     return {
-        type: FILTER_ARTICLE
+		type: DATE_RANGE,
+		payload: { range }
     }
 }
