@@ -31,6 +31,29 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired
 }
 
-export default connect(state => ({
-    articles: state.articles
-}))(ArticleList)
+export default connect(state => {
+	const {articles, filters: {dateRange, selected}} = state
+
+	const filteredArticles  = articles.filter(function(article){
+		return selected.filter(function(id){
+			return id == article.id;
+		}).length !== 0
+	});
+
+	const nextArticleArr = (filteredArticles.length > 0) ? filteredArticles : articles
+	let dateFilteredArticles = []
+	
+	if (dateRange.from !== null && dateRange.to !== null) {
+		dateFilteredArticles  = nextArticleArr.filter(function(article){
+			return Date.parse(dateRange.from) < Date.parse(article.date) && Date.parse(article.date)< Date.parse(dateRange.to)
+		});
+	}
+	
+	return {
+		articles: (filteredArticles.length > 0 || dateFilteredArticles.length > 0) 
+		? (dateFilteredArticles.length > 0 
+			? dateFilteredArticles 
+			: filteredArticles) 
+		: articles
+	}
+})(ArticleList)
