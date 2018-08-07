@@ -6,9 +6,7 @@ export default (articlesState = defaultArticles, action) => {
 
     switch (type) {
 		case DELETE_ARTICLE:
-			console.log('======= DELETE_ARTICLE')
             return articlesState.filter(article => article.id !== payload.id)
     }
-	console.log('======= articlesState из DELETE_ARTICLE', articlesState)
     return articlesState
 }
