@@ -8,7 +8,6 @@ const commentsMap = defaultComments.reduce((acc, comment) => ({
 
 export default (state = commentsMap, action) => {
     const { type, payload, response, error } = action
-
     switch (type) {
 
     }
