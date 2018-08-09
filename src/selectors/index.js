@@ -14,10 +14,10 @@ export const filtratedArticlesSelector = createSelector(articlesSelector, filter
 	articleId.forEach(id => {
 		const published = Date.parse(articles[id].date)
 		
-		if(selected.length && selected.includes(id)) {
+		if(selected.length && !selected.includes(id)) {
 			idDelete = id
 		}
-		if(from && to && (published > from && published < to)) {
+		if(from && to && (published < from || published > to)) {
 			idDelete = id
 		}
 		delete articlesCopy[idDelete]
@@ -25,12 +25,6 @@ export const filtratedArticlesSelector = createSelector(articlesSelector, filter
 	
 	return articlesCopy
 	
-	
-	// return articles.filter(article => {
-    //     const published = Date.parse(article.date)
-    //     return (!selected.length || selected.includes(article.id)) &&
-    //         (!from || !to || (published > from && published < to))
-    // })
 })
 
 export const createCommentSelector = () => createSelector(commentListSelector, idSelector, (comments, id) => {
