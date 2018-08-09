@@ -34,3 +34,7 @@ export const createCommentSelector = () => createSelector(commentListSelector, i
 export const createArticleSelector = () => createSelector(articlesSelector, idSelector, (article, id) => {
     return article[id]
 })
+
+export const createCommentReSelector = () => createSelector(articlesSelector, idSelector, (article, id) => {
+	console.log('-------------render me !!!!!', article[id].comments.length)
+})

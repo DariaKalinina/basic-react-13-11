@@ -44,3 +44,4 @@ class CommentList extends Component {
 
 
 export default toggleOpen(CommentList)
+

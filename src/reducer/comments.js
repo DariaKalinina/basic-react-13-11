@@ -18,12 +18,9 @@ export default (commentList = commentsMap, action) => {
     switch (type) {
 		case SUBMIT:
 			const articlesCopy = {...articlesMap}
-			const {user, text} = payload
+			const {user, text, idArticle} = payload
 			commentList[index] = {id: index, user, text}
-			console.log('new commentList', commentList)
-			const {idArticle} = payload
 			articlesCopy[idArticle].comments.push(index)
-			console.log('new articlesCopy', articlesCopy)
 			return commentList	
     }
 
