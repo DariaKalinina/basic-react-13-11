@@ -8,11 +8,12 @@ const articlesMap = defaultArticles.reduce((acc, article) => ({
 
 export default (articles = articlesMap, action) => {
 	const { type, payload } = action
+	
     switch (type) {
 		case DELETE_ARTICLE:
 			const articlesCopy = {...articles}
 			delete articlesCopy[payload.id]
-			return articlesCopy
+			return articlesCopy	
     }
 
     return articles

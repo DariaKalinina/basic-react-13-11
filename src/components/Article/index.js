@@ -32,7 +32,6 @@ class Article extends PureComponent {
     }
 
     componentDidCatch(err) {
-		console.log('err in Article', err)
         this.setState({
             error: 'can`t display an article'
         })
@@ -60,7 +59,8 @@ class Article extends PureComponent {
                 <button onClick = {this.increment}>increment</button>
                 <section>{text}</section>
                 <CommentList comments = {comments}
-                             key = {this.state.counter}/>
+                             key = {this.state.counter}
+							 idArticle = {id}/>
             </div>
         )
         return (
@@ -102,4 +102,4 @@ const createMapStateToProps = () => {
 }
 
 
-export default connect(createMapStateToProps, {deleteArticle})(Article)
+export default connect(createMapStateToProps, {deleteArticle} )(Article)
