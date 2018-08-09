@@ -6,7 +6,7 @@ import toggleOpen from '../decorators/toggleOpen'
 
 class CommentList extends Component {
     static propTypes = {
-        comments: PropTypes.array.isRequired,
+        comments: PropTypes.array,
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
@@ -27,7 +27,7 @@ class CommentList extends Component {
         const {comments, isOpen} = this.props
         if (!isOpen) return null
 
-        const body = comments.length ? (
+        const body = comments ? (
             <ul>
                 {comments.map(id => <li key = {id}><Comment id = {id} /></li>)}
             </ul>

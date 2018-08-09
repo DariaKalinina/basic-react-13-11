@@ -32,6 +32,7 @@ class Article extends PureComponent {
     }
 
     componentDidCatch(err) {
+		console.log('err in Article', err)
         this.setState({
             error: 'can`t display an article'
         })

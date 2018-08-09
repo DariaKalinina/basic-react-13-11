@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { submitForm } from '../../AC'
 import './style.css'
 
 class CommentForm extends Component {
@@ -25,11 +27,13 @@ class CommentForm extends Component {
     }
 
     handleSubmit = ev => {
-        ev.preventDefault()
+		const { submitForm } = this.props
+		ev.preventDefault()
         this.setState({
             user: '',
             text: ''
-        })
+		})
+		submitForm(this.state.user, this.state.text)
     }
 
     isValidForm = () => ['user', 'text'].every(this.isValidField)
@@ -58,4 +62,4 @@ const limits = {
     }
 }
 
-export default CommentForm
+export default connect(null, { submitForm })(CommentForm)
