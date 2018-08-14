@@ -15,10 +15,11 @@ export default (articles = articlesMap, action) => {
 			delete articlesCopy[payload.id]
 			return articlesCopy	
 		case SUBMIT:
-			const {idArticle} = payload
-			const articlesCopy2 = {...articlesMap}
-			articlesCopy2[idArticle].comments.push(randomId)
-			return articlesCopy2		
+			const article = articles[payload.idArticle] 
+			return {...articles, [payload.idArticle]: {
+				...article,
+				comments: (article.comments || []).concat(randomId)
+			}}		
     }
 
     return articles
