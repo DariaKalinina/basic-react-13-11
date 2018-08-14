@@ -97,7 +97,6 @@ const createMapStateToProps = () => {
 	const articleSelector = createArticleSelector()
 	
     return (state, ownProps) => {
-		console.log('==================================')
 		return ({
 			article: articleSelector(state, ownProps)
 		})
