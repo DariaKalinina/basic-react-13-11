@@ -27,10 +27,10 @@ export function changeSelection(selected) {
     }
 }
 
-export function submitForm(user, text, idArticle, commentArr) {
+export function submitForm(user, text, idArticle ) {
     return {
 		type: SUBMIT,
-		payload: { user, text, idArticle, commentArr },
-		index: 'create'
+		payload: { user, text, idArticle },
+		randomId: true
     }
 }

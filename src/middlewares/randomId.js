@@ -1,15 +1,10 @@
 export default store => next => action => {  
+	if (!action.randomId) return next(action)
 
-	const { index, ...rest } = action;
-
-	if (index !== 'create') {
-		return next(action);
-	  }
-
-	let indexRandom ='' 
+	let id ='' 
 	const abd ='abcdefghijklmnopqrstuvwxyz0123456789'
-	while(indexRandom.length < 10) {
-		indexRandom += abd[Math.random() * abd.length|0]
+	while(id.length < 10) {
+		id += abd[Math.random() * abd.length|0]
 	}
-	return next({ ...rest, index: indexRandom })
+	return next({ ...action, randomId: id })
   } 

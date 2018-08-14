@@ -7,7 +7,6 @@ import CSSTransition from 'react-addons-css-transition-group'
 import './style.css'
 import {deleteArticle} from '../../AC'
 import {createArticleSelector} from '../../selectors'
-import {createCommentReSelector} from '../../selectors'
 
 class Article extends PureComponent {
     static propTypes = {
@@ -96,13 +95,11 @@ class Article extends PureComponent {
 
 const createMapStateToProps = () => {
 	const articleSelector = createArticleSelector()
-	const commentReSelector = createCommentReSelector()
 	
     return (state, ownProps) => {
 		console.log('==================================')
 		return ({
-			article: articleSelector(state, ownProps),
-			comment: commentReSelector(state, ownProps)
+			article: articleSelector(state, ownProps)
 		})
     }
 }
