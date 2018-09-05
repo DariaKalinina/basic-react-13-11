@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { submitForm } from '../../AC'
 import './style.css'
 
 class CommentForm extends Component {
@@ -25,11 +27,13 @@ class CommentForm extends Component {
     }
 
     handleSubmit = ev => {
-        ev.preventDefault()
+		const { submitForm, idArticle } = this.props
+		ev.preventDefault()
         this.setState({
             user: '',
             text: ''
-        })
+		})
+		submitForm(this.state.user, this.state.text, idArticle)
     }
 
     isValidForm = () => ['user', 'text'].every(this.isValidField)
@@ -49,13 +53,16 @@ class CommentForm extends Component {
 
 const limits = {
     user: {
-        min: 10,
-        max: 100
+        min: 1,
+        max: 5
     },
     text: {
-        min: 20,
-        max: 100
+        min: 1,
+        max: 5
     }
 }
 
-export default CommentForm
+export default connect(state => ({
+    comments: state.comments,
+    articles: state.articles
+}), { submitForm })(CommentForm)

@@ -6,14 +6,13 @@ import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import './style.css'
 import {deleteArticle} from '../../AC'
+import {createArticleSelector} from '../../selectors'
 
 class Article extends PureComponent {
     static propTypes = {
-        article: PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            text: PropTypes.string,
-            comments: PropTypes.array
-        }).isRequired,
+		title: PropTypes.string,
+		text: PropTypes.string,
+		comments: PropTypes.array,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     }
@@ -54,19 +53,20 @@ class Article extends PureComponent {
         console.log('---', 'rendering article')
         if (this.state.error) return <h1>{this.state.error}</h1>
 
-        const {article, isOpen, toggleOpen} = this.props
+		const {article: {comments, date, id, text, title}, isOpen, toggleOpen} = this.props
         const body = isOpen && (
             <div>
                 <button onClick = {this.increment}>increment</button>
-                <section>{article.text}</section>
-                <CommentList comments = {article.comments}
-                             key = {this.state.counter}/>
+                <section>{text}</section>
+                <CommentList comments = {comments}
+                             key = {this.state.counter}
+							 idArticle = {id}/>
             </div>
         )
         return (
             <div>
                 <h2>
-                    {article.title}
+                    {title}
                     <button onClick={toggleOpen}>
                         {isOpen ? 'close' : 'open'}
                     </button>
@@ -82,7 +82,7 @@ class Article extends PureComponent {
                 >
                     {body}
                 </CSSTransition>
-                <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+                <h3>creation date: {(new Date(date)).toDateString()}</h3>
             </div>
         )
     }
@@ -93,5 +93,15 @@ class Article extends PureComponent {
     }
 }
 
+const createMapStateToProps = () => {
+	const articleSelector = createArticleSelector()
+	
+    return (state, ownProps) => {
+		return ({
+			article: articleSelector(state, ownProps)
+		})
+    }
+}
 
-export default connect(null, { deleteArticle })(Article)
+
+export default connect(createMapStateToProps, {deleteArticle} )(Article)

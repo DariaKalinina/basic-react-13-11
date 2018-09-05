@@ -1,4 +1,4 @@
-import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION} from '../constants'
+import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, SUBMIT} from '../constants'
 
 export function increment() {
     return {
@@ -24,5 +24,13 @@ export function changeSelection(selected) {
     return {
         type: CHANGE_SELECTION,
         payload: { selected }
+    }
+}
+
+export function submitForm(user, text, idArticle ) {
+    return {
+		type: SUBMIT,
+		payload: { user, text, idArticle },
+		randomId: true
     }
 }

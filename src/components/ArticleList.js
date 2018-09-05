@@ -8,14 +8,17 @@ import {filtratedArticlesSelector} from '../selectors'
 class ArticleList extends Accordion {
     render() {
         console.log('---', 2)
-        const {articles} = this.props
-        if (!articles.length) return <h3>No Articles</h3>
-        const articleElements = articles.map((article) => <li key={article.id}>
-            <Article article={article}
-                     isOpen={article.id === this.state.openItemId}
-                     toggleOpen={this.toggleOpenItemMemoized(article.id)}
-            />
-        </li>)
+		const {articles} = this.props
+        if (!articles) return <h3>No Articles</h3>
+		let articleElements = []
+		for (let article in articles) {
+			articleElements.push(<li key={article}>
+				<Article id={article}
+						 isOpen={article === this.state.openItemId}
+						 toggleOpen={this.toggleOpenItemMemoized(article)}
+				/>
+			</li>)
+		}
         return (
             <ul>
                 {articleElements}
@@ -26,11 +29,11 @@ class ArticleList extends Accordion {
 
 
 ArticleList.defaultProps = {
-    articles: []
+    articles: {}
 }
 
 ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
+    articles: PropTypes.object.isRequired
 }
 
 export default connect(state => {
